@@ -1,0 +1,58 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "api",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "wgpy.api.main:app",
+            ],
+            "envFile": "${workspaceFolder}/.env",
+            "jinja": true,
+            "justMyCode": true,
+            "pythonArgs": [
+                "-Xfrozen_modules=off"
+            ],
+        },
+        {
+            "name": "worker",
+            "type": "python",
+            "request": "launch",
+            "module": "remoulade",
+            "args": [
+                "wgpy.worker",
+            ],
+            "env": {
+                "PYTHONUNBUFFERED": "1",
+            },
+            "envFile": "${workspaceFolder}/.env",
+            "jinja": true,
+            "justMyCode": true,
+            "pythonArgs": [
+                "-Xfrozen_modules=off"
+            ],
+        },
+    ],
+    "compounds": [
+        {
+            "name": "API and Worker",
+            "configurations": [
+                "api",
+                "worker"
+            ]
+        }
+    ],
+}
